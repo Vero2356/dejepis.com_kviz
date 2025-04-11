@@ -1,3 +1,6 @@
+//sledovani u ktere otazky jsem
+let questionIndex = 0;
+//otazky
 const questions = [
     {
       type: "multiple",
@@ -108,9 +111,31 @@ const questions = [
         "Vedla ke kapitulaci Itálie"
       ],
       correct: 3
+
     }
   ];
-  
-let testContainer = document.getElementById("Test");
-let btn = createElement("button", "Zkontrolovat", "btn", testContainer);
+  //nalezení div kde budou otazky
+let  Testcontainer = document.getElementById("Test");
 
+//funkce pro vytvoření otázek
+function createQuestion() {
+Testcontainer.innerHTML = ""; //vymazání předchozí otázky
+
+let q = questions[questionIndex]; //nalezení aktuální otázky
+
+//vytvoření nadpisu pro otazku
+
+let Otazka = document.createElement("h6");
+
+Otazka.textContent = q.question; //text otazky. 
+// Otazka.textContent je pro vytvoření nadpisu
+//q.question --> q vezme otázku z pole otázek a .question vezme text otázky
+
+Testcontainer.appendChild(Otazka); //přidání nadpisu do divu
+
+let form = document.createElement("form"); //vytvoření formuláře pro odpovědi
+form.id = "answer-form"; //udělání id pro formulář  
+
+
+
+}
