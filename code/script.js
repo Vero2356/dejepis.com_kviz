@@ -136,6 +136,18 @@ Testcontainer.appendChild(Otazka); //přidání nadpisu do divu
 let form = document.createElement("form"); //vytvoření formuláře pro odpovědi
 form.id = "answer-form"; //udělání id pro formulář  
 
+q.options.forEach((option, index) => { //pro každou odpověď v otázce
+  let label  = document.createElement("label"); //vytvoření labelu pro odpověď
+let input = document.createElement("input"); //vytvoření inputu pro odpověď
 
+input.type = q.type === "multiple" ? "checkbox" : "radio"; 
+//pokud je otázka typu multiple, input bude checkbox, jinak radio
+input.name = "question";
+input.value = index;
 
+label.appendChild(input); //přidání inputu do labelu
+label.appendChild(document.createTextNode(option)); //přidání textu odpovědi do labelu
+form.appendChild(label); //přidání labelu do formuláře
+form.appendChild(document.createElement("br")); //přidání nového řádku
+});
 }
