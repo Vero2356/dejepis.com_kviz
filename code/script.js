@@ -151,3 +151,23 @@ form.appendChild(label); //přidání labelu do formuláře
 form.appendChild(document.createElement("br")); //přidání nového řádku
 });
 }
+
+quizContainer.appendChild(form); //přidání formuláře do divu
+
+//tlačitko pro odeslání odpovědi
+
+let button = document.createElement("button"); //vytvoření tlačítka
+button.textContent = "Odpovědět"; //text tlačítka
+button.onclick = checkAnswer; //při kliknutí na tlačítko se spustí funkce checkAnswer
+quizContainer.appendChild(button);
+
+let resultEL = document.createElement("p");
+ressultEl.id = "result"; //vytvoření id pro výsledek
+quizContainer.appendChild(resultEL);
+
+function checkAnswer(event) { //funkce pro kontrolu odpovědi
+  event.preventDefault();
+  let q = questions[currentIndex]; //nalezení aktuální otázky
+let inputs = document.querySelectorAll('input[name="answer"]:checked'); //nalezení všech inputů s name question
+let selected = Array.from(inputs).map(input => input.value);
+}
