@@ -15,9 +15,9 @@ const questions = shuffle([
       "Zvýšení síly Spojenců",
       "Okamžité vítězství",
       "Válka v Tichomoří",
-      "Porážka Japonska v Pearl Harbor"
+      "Útok Japonska na Pearl Harbor"
     ],
-    correct: [0, 2]
+    correct: [0, 2, 3]
   },
   {
     type: "single",
@@ -117,7 +117,7 @@ const questions = shuffle([
       "Vedla ke kapitulaci Itálie"
     ],
     correct: 2
-  }
+  },
   {
     type: "multiple",
     question: "Jaké byly důsledky bitvy u Stalingradu?",
