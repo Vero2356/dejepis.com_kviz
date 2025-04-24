@@ -1,6 +1,13 @@
 let questionIndex = 0;
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
 
-const questions = [
+const questions = shuffle([
   {
     type: "multiple",
     question: "Co bylo důsledkem vstupu USA do války?",
@@ -111,7 +118,96 @@ const questions = [
     ],
     correct: 2
   }
-];
+  {
+    type: "multiple",
+    question: "Jaké byly důsledky bitvy u Stalingradu?",
+    options: [
+      "Ztráta celé německé 6. armády",
+      "Zastavení německého postupu na východě",
+      "Okamžitá kapitulace Německa",
+      "Začátek sovětského protiútoku"
+    ],
+    correct: [0, 1, 3]
+  },
+  {
+    type: "single",
+    question: "Jaký význam měla bitva u El Alameinu?",
+    options: [
+      "Zabránila spojencům vylodit se v Itálii",
+      "Znemožnila Německu ovládnout Suezský průplav",
+      "Vedla k pádu Stalingradu",
+      "Zničila japonské loďstvo"
+    ],
+    correct: 1
+  },
+  {
+    type: "multiple",
+    question: "Jaké byly důsledky bitvy u Midway pro Japonsko?",
+    options: [
+      "Ztráta čtyř letadlových lodí",
+      "Konec japonské ofenzivy v Pacifiku",
+      "Nucený ústup Japonska",
+      "Začátek okupace USA"
+    ],
+    correct: [0, 1, 2]
+  },
+  {
+    type: "single",
+    question: "Který generál vedl německé jednotky v severní Africe?",
+    options: [
+      "Heinz Guderian",
+      "Erwin Rommel",
+      "Friedrich Paulus",
+      "Georgy Žukov"
+    ],
+    correct: 1
+  },
+  {
+    type: "single",
+    question: "Jaký byl důvod otevření druhé fronty v Itálii?",
+    options: [
+      "Obrana Británie před invazí",
+      "Zastavení sovětského postupu",
+      "Oslabení německých sil na východě",
+      "Zabránění japonské invazi do Austrálie"
+    ],
+    correct: 2
+  },
+  {
+    type: "multiple",
+    question: "Jakými způsoby se změnila situace na východní frontě po roce 1942?",
+    options: [
+      "Sověti přešli do ofenzivy",
+      "Němci ztratili iniciativu",
+      "Byl uzavřen mír mezi SSSR a Německem",
+      "Zimní podmínky znovu zasáhly německé jednotky"
+    ],
+    correct: [0, 1, 3]
+  },
+  {
+    type: "single",
+    question: "Kdy došlo k porážce německých vojsk u Stalingradu?",
+    options: [
+      "V zimě 1941",
+      "Na jaře 1942",
+      "V únoru 1943",
+      "V prosinci 1943"
+    ],
+    correct: 2
+  },
+  {
+    type: "single",
+    question: "Která událost vedla ke vstupu SSSR do protiútoku?",
+    options: [
+      "Bitva o Británii",
+      "Vylodění v Normandii",
+      "Zastavení Němců u Moskvy",
+      "Operace Market Garden"
+    ],
+    correct: 2
+  }
+
+]);
 
 let Testcontainer = document.getElementById("Test");
 
@@ -120,7 +216,17 @@ function createQuestion() {
 
   let q = questions[questionIndex];
 
-  let Otazka = document.createElement("h6");
+  // TEXT – jedno nebo více správných odpovědí
+  let info = document.createElement("h5");
+  info.style.fontWeight = "bold";
+  info.style.color = "#444";
+  info.textContent = q.type === "multiple"
+    ? "Tato otázka má VÍCE správných odpovědí. (Můžeš zaškrtnout více možností)"
+    : "Tato otázka má JEDNU správnou odpověď. (Vyber jen jednu možnost)";
+  Testcontainer.appendChild(info);
+
+  // Otázka
+  let Otazka = document.createElement("h3");
   Otazka.textContent = q.question;
   Testcontainer.appendChild(Otazka);
 
@@ -153,6 +259,7 @@ function createQuestion() {
   Testcontainer.appendChild(resultEl);
 }
 
+
 function checkAnswer(event) {
   event.preventDefault();
 
@@ -170,7 +277,7 @@ function checkAnswer(event) {
     }
   } else if (q.type === "multiple") {
     let isCorrect = selected.length === q.correct.length &&
-                    selected.every(value => q.correct.includes(value));
+      selected.every(value => q.correct.includes(value));
 
     resultEl.textContent = isCorrect ? "Správně!" : "Špatně!";
   }
